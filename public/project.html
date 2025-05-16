@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+    <header>
+        <h1>Project</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skill.html">Skill</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="projects">
+        
+        <div id="project-list"></div>
+
+        <!-- Add Project Form -->
+        <h3>Add New Project</h3>
+        <form id="add-project-form">
+            <input type="text" id="project-title" placeholder="Project Title" required>
+            <input type="text" id="project-description" placeholder="Project Description" required>
+            <button type="submit">Add Project</button>
+        </form>
+    </section>
+
+    <script>
+       /* // Initial Project Data
+        const projects = [
+            { title: "Portfolio Website", description: "A personal portfolio built with HTML, CSS, and JavaScript." },
+            { title: "To-Do App", description: "A task management app using local storage." },
+            { title: "Weather App", description: "Displays weather data using an external API." }
+        ];
+
+        const projectList = document.getElementById("project-list");
+
+        // Function to create a project node and append to list
+        function addProjectToDOM(title, description) {
+            const res = await fetch('/api/services');
+            const projects = await res.json();
+
+        
+            const projectItem = document.createElement("div");
+            projectItem.classList.add("project-item");
+
+            const projectTitle = document.createElement("h3");
+            projectTitle.textContent = title;
+
+            const projectDesc = document.createElement("p");
+            projectDesc.textContent = description;
+
+            projectItem.appendChild(projectTitle);
+            projectItem.appendChild(projectDesc);
+
+            projectList.appendChild(projectItem);
+            
+        }
+
+        // Load initial projects
+        projects.forEach(project => addProjectToDOM(projecttitle, projectdescription));
+
+        // Handle form submission
+        const addProjectForm = document.getElementById("add-project-form");
+
+        addProjectForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const titleInput = document.getElementById("project-title");
+            const descriptionInput = document.getElementById("project-description");
+
+            const newTitle = titleInput.value.trim();
+            const newDescription = descriptionInput.value.trim();
+
+            if (newTitle && newDescription) {
+                addProjectToDOM(newTitle, newDescription);
+
+                // Clear form fields
+                titleInput.value = "";
+                descriptionInput.value = "";
+            } else {
+                alert("Please enter both title and description.");
+            }
+        });*/
+    </script>
+    <script>
+
+ //Form Submission (Handling User Input):
+
+         
+    document.getElementById('add-project-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const title = document.getElementById('project-title').value;
+      const desc = document.getElementById('project-description').value;
+
+      const response = await fetch('/api/services', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, desc })
+      });
+
+      const data = await response.json();
+      alert(data.message || 'Project added!');
+    });
+    
+
+  async function loadProjects() {
+    const res = await fetch('/api/services');
+    const projects = await res.json();
+
+    const list = document.getElementById('projectList');
+    list.innerHTML = '';
+
+    projects.forEach(project => {
+      const item = document.createElement('li');
+      item.textContent = `${project.title} (${project.desc})`;
+      list.appendChild(item);
+    });
+  }
+
+  window.onload = loadProjects; // Auto-run when page loads
+
+    
+  </script>
+
+    
+    </body>
+</html>
+
+
+</body>
+</html>
