@@ -49,7 +49,9 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+//const port = 3000;
+const port = process.env.port || 3000;
+//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://alittaoj30:alitta@cluster0.q7b9z3s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
